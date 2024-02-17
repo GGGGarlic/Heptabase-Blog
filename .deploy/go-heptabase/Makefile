@@ -1,5 +1,10 @@
 install:
-	helm -n blog upgrade frontend . -f local.values.yaml --create-namespace --install --kube-context kiila
+	helm -n blog upgrade frontend . \
+ 		-f local.values.yaml \
+ 		--create-namespace \
+ 		--install \
+ 		--kube-context kiila \
+ 		--set-string image.tag=$(shell git rev-parse --short HEAD)
 
 uninstall:
 	helm -n blog uninstall frontend --kube-context kiila
